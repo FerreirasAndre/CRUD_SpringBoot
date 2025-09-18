@@ -1,9 +1,9 @@
 package com.example.SpringTeste.Services;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import com.example.SpringTeste.Entity.Usuario;
 import com.example.SpringTeste.repository.UsuarioRepository;
-
-import lombok.Builder;
 
 
 @Service
@@ -18,8 +18,9 @@ public class UsuarioService {
 }
 	
 	//Método para salvar usuários no banco de dados
-	public void SalvarUsuario(Usuario usuario) {
-		repository.saveAndFlush(usuario);
+	public String SalvarUsuario(Usuario usuario) {
+		repository.save(usuario);
+		return "Usuário cadastrado com sucesso!!!";
 	}
 	
 	//Métodos para procurar um usuário (pelo e-mail e pelo ID)
@@ -38,6 +39,10 @@ public class UsuarioService {
 	//Métodos para deletar um usuário (pelo e-mail e pelo Id)
 	public void deletaPorEmail(String email) {
 		repository.deletByEmail(email);
+	}
+	
+	public List<Usuario> procuraTodos(){
+		return repository.findAll();
 	}
 	
 	public void deletaPorId(Integer id) {
