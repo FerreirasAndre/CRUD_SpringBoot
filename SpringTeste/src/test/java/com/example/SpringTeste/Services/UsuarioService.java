@@ -1,7 +1,10 @@
 package com.example.SpringTeste.Services;
 import org.springframework.stereotype.Service;
-import com.example.SpringTeste.Entities.Usuario;
+import com.example.SpringTeste.Entity.Usuario;
 import com.example.SpringTeste.repository.UsuarioRepository;
+
+import lombok.Builder;
+
 
 @Service
 public class UsuarioService {
@@ -41,11 +44,16 @@ public class UsuarioService {
 		repository.deleteById(id);
 	}
 	
-	public void atualizarUsuario(Integer id, Usuario usuario) {
-		Usuario usuarioEntity = buscaId(id);
-		Usuario usuarioAtualizado = Usuario.builder()
-				.id(usuario.getId() != null?
-						usuario.getId(): usuarioEntity.getId())
-				.build()
+	public String atualizarUsuario(Integer id, Usuario usuario) {
+		Usuario response = repository.findById(id).get();
+		
+		response.setEmail(usuario.getEmail());
+		response.setNome(usuario.getNome());
+		response.setSenha(usuario.getSenha());
+		
+		repository.save(response);
+		return "Uruário editado com sucesso!";
+		
+			
 	}
 }
