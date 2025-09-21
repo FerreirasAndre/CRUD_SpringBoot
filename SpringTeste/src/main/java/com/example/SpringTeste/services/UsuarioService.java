@@ -1,9 +1,10 @@
-package com.example.SpringTeste.Services;
+package com.example.SpringTeste.services;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import com.example.SpringTeste.Entity.Usuario;
-import com.example.SpringTeste.repository.UsuarioRepository;
+
+import com.example.SpringTeste.entities.Usuario;
+import com.example.SpringTeste.repositories.UsuarioRepository;
 
 
 @Service
@@ -37,8 +38,9 @@ public class UsuarioService {
 	}
 	
 	//Métodos para deletar um usuário (pelo e-mail e pelo Id)
-	public void deletaPorEmail(String email) {
-		repository.deletByEmail(email);
+	public String deletaPorEmail(String email) {
+		repository.deleteByEmail(email);
+		return "Uruário deletado";
 	}
 	
 	public List<Usuario> procuraTodos(){
